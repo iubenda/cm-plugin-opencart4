@@ -1,0 +1,86 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+	<div class="container-fluid">
+      <div class="float-end">
+        <button type="submit" form="form-payment" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa-solid fa-save"></i></button>
+        <a href="{{ cancel }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fa-solid fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+	
+  </div>
+  
+  <div class="container-fluid">
+    {% if error_warning %}
+      <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    {% endif %}
+
+      <div style="">
+        <span style="margin-left:12px; line-height: 25px">{{ text_consentmanager }}</span><br/>
+        <span style="margin-left:12px; line-height: 25px">{{ text_consentmanager_suppport }}</span>
+      </div>
+	  
+	  
+	<div class="card">
+      <div class="card-header"><i class="fa-solid fa-pencil"></i> {{ text_edit }}</div>
+	  <div class="card-body">
+        <form id="form-payment" action="{{ action }}" method="post">
+			<div class="row mb-3 required">
+				<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+				<div class="col-sm-10">
+				  <select name="module_consentmanager_status" id="input-status" class="form-control">
+					{% if module_consentmanager_status %}
+					  <option value="1" selected="selected">{{ text_enabled }}</option>
+					  <option value="0">{{ text_disabled }}</option>
+					{% else %}
+					  <option value="1">{{ text_enabled }}</option>
+					  <option value="0" selected="selected">{{ text_disabled }}</option>
+					{% endif %}
+				  </select>
+				</div>
+			</div> 
+			
+			<div class="row mb-3 required">
+				<label class="col-sm-2 control-label" for="input_cmp_id"><span data-toggle="tooltip" title="{{ help_cmp_id }}">{{ entry_cmp_id }}</span></label>
+				<div class="col-sm-10">
+				  <input type="text" name="module_consentmanager_cmp_id" value="{{ module_consentmanager_cmp_id }}" id="input_cmp_id" class="form-control"/>
+				  {% if error_cmp_id %}
+				  <div class="text-danger">{{ error_cmp_id }}</div>
+				  {% endif %}
+				</div>
+           </div>
+		   
+          <div class="row mb-3 required">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_mode }}</label>
+            <div class="col-sm-10">
+              <select name="module_consentmanager_mode" id="input-status" class="form-control">
+                {% if module_consentmanager_mode %}
+                  <option value="1" selected="selected">{{ text_semi_automatic }}</option>
+                  <option value="0">{{ text_automatic }}</option>
+                {% else %}
+                  <option value="1">{{ text_semi_automatic }}</option>
+                  <option value="0" selected="selected">{{ text_automatic }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+		  
+          <div class="row mb-3 required" style="display: none">
+            <label class="col-sm-2 control-label" for="input_custom_html">{{ entry_custom_html }}</label>
+            <div class="col-sm-10">
+              <textarea type="text" name="module_consentmanager_custom_html" id="input_custom_html" class="form-control" rows="8" cols="80">{{ module_consentmanager_custom_html }}</textarea>
+                </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}
